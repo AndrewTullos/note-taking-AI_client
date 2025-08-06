@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Mic, Square, Loader2, Send } from 'lucide-react'
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation"
+import { Navbar } from "@/components/Navbar";
+
 
 export default function RecordPage() {
     const [isRecording, setIsRecording] = useState(false)
@@ -97,71 +99,75 @@ export default function RecordPage() {
     }
 
     return (
-        <div className="container max-w-md mx-auto py-10 px-4">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Record Your Note</CardTitle>
-                    <CardDescription>
-                        Speak clearly and we'll transcribe your audio into smart notes.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col items-center justify-center py-10">
-                    <div className="relative w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-                        {isRecording && (
-                            <div className="absolute inset-0 rounded-full animate-pulse bg-primary/20"></div>
-                        )}
-                        {isRecording ? (
-                            <Square className="h-12 w-12 text-red-500" />
-                        ) : (
-                            <Mic className="h-12 w-12 text-primary" />
-                        )}
-                    </div>
-
-                    {audioBlob && !isRecording && (
-                        <audio controls className="w-full mb-4">
-                            <source src={URL.createObjectURL(audioBlob)} type="audio/webm" />
-                            Your browser does not support the audio element.
-                        </audio>
-                    )}
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                    {!isRecording && !audioBlob && (
-                        <Button onClick={startRecording} className="w-full">
-                            Start Recording
-                        </Button>
-                    )}
-
-                    {isRecording && (
-                        <Button onClick={stopRecording} variant="destructive" className="w-full">
-                            Stop Recording
-                        </Button>
-                    )}
-
-                    {audioBlob && !isRecording && (
-                        <div className="flex w-full gap-2">
-                            <Button onClick={() => {
-                                setAudioBlob(null)
-                                audioChunksRef.current = []
-                            }} variant="outline">
-                                Discard
-                            </Button>
-                            <Button onClick={processAudio} disabled={isProcessing} className="flex-1">
-                                {isProcessing ? (
-                                    <>
-                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                        Processing...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Send className="mr-2 h-4 w-4" />
-                                        Process Audio
-                                    </>
-                                )}
-                            </Button>
+        <>
+            <Navbar />
+            <div className="container max-w-md mx-auto py-10 px-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Record Your Note</CardTitle>
+                        <CardDescription>
+                            Speak clearly and we'll transcribe your audio into smart notes.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-col items-center justify-center py-10">
+                        <div className="relative w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                            {isRecording && (
+                                <div className="absolute inset-0 rounded-full animate-pulse bg-primary/20"></div>
+                            )}
+                            {isRecording ? (
+                                <Square className="h-12 w-12 text-red-500" />
+                            ) : (
+                                <Mic className="h-12 w-12 text-primary" />
+                            )}
                         </div>
-                    )}
-                </CardFooter>
-            </Card>
-        </div>
+
+                        {audioBlob && !isRecording && (
+                            <audio controls className="w-full mb-4">
+                                <source src={URL.createObjectURL(audioBlob)} type="audio/webm" />
+                                Your browser does not support the audio element.
+                            </audio>
+                        )}
+                    </CardContent>
+                    <CardFooter className="flex justify-between">
+                        {!isRecording && !audioBlob && (
+                            <Button onClick={startRecording} className="w-full">
+                                Start Recording
+                            </Button>
+                        )}
+
+                        {isRecording && (
+                            <Button onClick={stopRecording} variant="destructive" className="w-full">
+                                Stop Recording
+                            </Button>
+                        )}
+
+                        {audioBlob && !isRecording && (
+                            <div className="flex w-full gap-2">
+                                <Button onClick={() => {
+                                    setAudioBlob(null)
+                                    audioChunksRef.current = []
+                                }} variant="outline">
+                                    Discard
+                                </Button>
+                                <Button onClick={processAudio} disabled={isProcessing} className="flex-1">
+                                    {isProcessing ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Processing...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send className="mr-2 h-4 w-4" />
+                                            Process Audio
+                                        </>
+                                    )}
+                                </Button>
+                            </div>
+                        )}
+                    </CardFooter>
+                </Card>
+            </div>
+
+        </>
     )
 }
