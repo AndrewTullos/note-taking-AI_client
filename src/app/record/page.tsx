@@ -4,7 +4,7 @@ import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mic, Square, Loader2, Send } from 'lucide-react'
-import { toast } from "sonner"
+import { toast } from 'sonner';
 import { useRouter } from "next/navigation"
 
 export default function RecordPage() {
@@ -41,11 +41,14 @@ export default function RecordPage() {
             setIsRecording(true)
         } catch (error) {
             console.error("Error accessing microphone:", error)
-            toast({
-                title: "Microphone Error",
+            toast.error("Error!", {
                 description: "Could not access your microphone. Please check permissions.",
-                variant: "destructive",
-            })
+            });
+            // toast({
+            //     title: "Microphone Error",
+            //     description: "Could not access your microphone. Please check permissions.",
+            //     variant: "destructive",
+            // })
         }
     }
 
@@ -80,11 +83,14 @@ export default function RecordPage() {
             router.push(`/notes/${data.noteId}`)
         } catch (error) {
             console.error("Error processing audio:", error)
-            toast({
-                title: "Processing Error",
+            toast.error("Error!", {
                 description: "Failed to process your recording. Please try again.",
-                variant: "destructive",
-            })
+            });
+            // toast({
+            //     title: "Processing Error",
+            //     description: "Failed to process your recording. Please try again.",
+            //     variant: "destructive",
+            // })
         } finally {
             setIsProcessing(false)
         }

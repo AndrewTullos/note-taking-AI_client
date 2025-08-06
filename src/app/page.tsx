@@ -7,7 +7,7 @@ import NoiseGradient from "@/components/NoiseGradient";
 export default function Home() {
   return (
 <>
-  <NoiseGradient />
+  {/*<NoiseGradient />*/}
   <div className="flex flex-col min-h-screen">
     <header className="px-4 lg:px-6 h-14 flex items-center">
       <Link className="flex items-center justify-center" href="#">
