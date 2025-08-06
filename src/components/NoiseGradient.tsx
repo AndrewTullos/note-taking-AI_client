@@ -97,9 +97,9 @@ const NoiseGradient = () => {
         float noise2 = snoise(uv * noiseScale * 2.0 - uTime * speed * 0.5) * noiseIntensity * 0.5;
         float noise = noise1 + noise2;
 
-        vec3 color1 = vec3(0.494, 0.918, 0.851); // #7EEAD9
-        vec3 color2 = vec3(0.522, 0.654, 0.914); // #85A7E9
-        vec3 color3 = vec3(0.369, 0.431, 0.541); // #5E6E8A
+        vec3 color1 = vec3(1.0, 1.0, 1.0);
+        vec3 color2 = vec3(0.65, 0.65, 0.65);
+        vec3 color3 = vec3(0.8, 0.8, 0.8);
 
 
         float distToMouse = distance(uv, mouseInfluence);

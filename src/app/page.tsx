@@ -8,7 +8,7 @@ import { Navbar } from "@/components/Navbar";
 export default function Home() {
   return (
 <>
-  {/*<NoiseGradient />*/}
+  <NoiseGradient />
   <div className="flex flex-col min-h-screen">
     <Navbar />
     <main className="flex-1">
